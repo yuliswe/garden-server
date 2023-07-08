@@ -1,0 +1,24 @@
+# This configuration file tells GraphQL Code Generator how
+# to generate types based on our schema.
+# documents:
+#   - "./cron-jobs/*.ts"
+schema: "./src/TypeDefs.graphql"
+generates:
+  # Specify where our generated types should live.
+  ./src/__generated__/resolvers-types.ts:
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"
+    config:
+      useIndexSignature: true
+      # More on this below!
+      contextType: "../ResolverContext#ResolverContext"
+      mapperTypeSuffix: "Data"
+      useTypeImports: true
+      typesPrefix: GQL
+      makeResolverTypeCallable: true
+      customResolveInfo: "@apollo/cache-control-types#GraphQLResolveInfoWithCacheControl"
+      mappers:
+        SystemState: ../system/watering#SystemState
+      scalars:
+        Timestamp: string

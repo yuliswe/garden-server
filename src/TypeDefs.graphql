@@ -1,0 +1,18 @@
+scalar Timestamp
+
+type SystemState {
+  watering: Boolean!
+  waterStartTime: Timestamp
+  waterEndTime: Timestamp
+  waterDuration: Int
+  remainingWaterDuration: Float
+}
+
+type Query {
+  systemState: SystemState!
+}
+
+type Mutation {
+  stopWatering: SystemState!
+  startWatering(minutes: Int!): SystemState!
+}
